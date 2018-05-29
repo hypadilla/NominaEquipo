@@ -27,8 +27,6 @@ public class Login extends javax.swing.JFrame {
 
     public Login() throws SQLException, ClassNotFoundException {
         initComponents();
-        UsuarioEntity entity = new UsuarioEntity(0, "hypadilla", "hypadilla");
-        controlador.Crear(Conexion.obtener(), entity);
     }
 
     /**
@@ -50,27 +48,16 @@ public class Login extends javax.swing.JFrame {
         LblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         jLabel1.setText("LOGIN");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(184, 28, 31, 14);
 
         jLabel2.setText("Usuario");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 86, 36, 14);
 
         TxtUsuario.setName(""); // NOI18N
-        getContentPane().add(TxtUsuario);
-        TxtUsuario.setBounds(76, 83, 242, 20);
 
         jLabel3.setText("Contraseña");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 117, 56, 14);
 
         TxtPassword.setName("TxtUsuario"); // NOI18N
-        getContentPane().add(TxtPassword);
-        TxtPassword.setBounds(76, 114, 242, 20);
 
         BtnIniciar.setText("Iniciar");
         BtnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,14 +65,59 @@ public class Login extends javax.swing.JFrame {
                 BtnIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(BtnIniciar);
-        BtnIniciar.setBounds(257, 177, 61, 23);
 
         BtnCancelar.setText("Cancelar");
-        getContentPane().add(BtnCancelar);
-        BtnCancelar.setBounds(176, 177, 75, 23);
-        getContentPane().add(LblMensaje);
-        LblMensaje.setBounds(20, 150, 300, 19);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
+                .addGap(10, 10, 10)
+                .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(LblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(BtnCancelar)
+                .addGap(5, 5, 5)
+                .addComponent(BtnIniciar))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2))
+                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel3))
+                    .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(LblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnCancelar)
+                    .addComponent(BtnIniciar)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

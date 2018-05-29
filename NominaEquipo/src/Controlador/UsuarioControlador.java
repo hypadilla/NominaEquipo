@@ -55,7 +55,7 @@ public class UsuarioControlador implements ICrud {
         String Password = Parametro.get(1);
         UsuarioEntity retorno = null;
         try {
-            PreparedStatement consulta = conexion.prepareStatement("SELECT id, usuario, password FROM TblUsuario WHERE Usuario = '?' and Password = '?'");
+            PreparedStatement consulta = conexion.prepareStatement("SELECT id, usuario, password FROM TblUsuario WHERE Usuario = ? and Password = ?");
             consulta.setString(1, Usuario);
             consulta.setString(2, Password);
             ResultSet resultado = consulta.executeQuery();

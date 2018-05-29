@@ -4,8 +4,10 @@ import Controlador.UsuarioControlador;
 import Modelo.Conexion;
 import Modelo.UsuarioEntity;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,7 +28,7 @@ public class Login extends javax.swing.JFrame {
     public Login() throws SQLException, ClassNotFoundException {
         initComponents();
         UsuarioEntity entity = new UsuarioEntity(0, "hypadilla", "hypadilla");
-        controlador.Crear(Conexion.obtener(), entity );
+        controlador.Crear(Conexion.obtener(), entity);
     }
 
     /**
@@ -45,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         TxtPassword = new javax.swing.JTextField();
         BtnIniciar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        LblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -82,14 +84,28 @@ public class Login extends javax.swing.JFrame {
         BtnCancelar.setText("Cancelar");
         getContentPane().add(BtnCancelar);
         BtnCancelar.setBounds(176, 177, 75, 23);
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 150, 300, 19);
+        getContentPane().add(LblMensaje);
+        LblMensaje.setBounds(20, 150, 300, 19);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIniciarActionPerformed
-
+        if (TxtPassword.getText().equals("") || TxtUsuario.getText().equals("")) {
+            LblMensaje.setText("El usuario y/o la contraseña no pueden estar vacios");
+        } else {
+            ArrayList<String> objeto = new ArrayList();
+            objeto.add(TxtUsuario.getText());
+            objeto.add(TxtPassword.getText());
+            try {
+                UsuarioEntity entity = (UsuarioEntity) controlador.Consultar(Conexion.obtener(), objeto);
+                if (entity != null) {
+                    LblMensaje.setText("Perfecto");
+                }else{LblMensaje.setText("Ingresaste mal el usuario y/o la contraseña");}
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_BtnIniciarActionPerformed
 
     /**
@@ -137,11 +153,11 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnIniciar;
+    private javax.swing.JLabel LblMensaje;
     private javax.swing.JTextField TxtPassword;
     private javax.swing.JTextField TxtUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

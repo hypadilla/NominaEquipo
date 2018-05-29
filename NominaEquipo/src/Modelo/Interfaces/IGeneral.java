@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package Modelo.Interfaces;
 
 import java.sql.Connection;
 
@@ -11,10 +11,10 @@ import java.sql.Connection;
  *
  * @author Hypadilla
  */
-public interface ICrud {
-    boolean Crear(Connection conexion,Object objeto); 
-    boolean Eliminar(Connection conexion,int ClavePrimaria); 
-    boolean Actualizar(Connection conexion,Object objeto); 
+public interface IGeneral {
+    Object Crear(Connection conexion,Object objeto); 
+    Object Eliminar(Connection conexion,int ClavePrimaria); 
+    Object Actualizar(Connection conexion,Object objeto); 
     Object Consultar(Connection conexion,Object objeto); 
     Object ConsultarTodos(Connection conexion,Object objeto); 
 }

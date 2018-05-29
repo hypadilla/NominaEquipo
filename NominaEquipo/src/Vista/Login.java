@@ -1,8 +1,9 @@
 package Vista;
 
-import Controlador.UsuarioControlador;
-import Modelo.Conexion;
-import Modelo.UsuarioEntity;
+import Controlador.LogicaNegocio.UsuarioManejador;
+import Modelo.Repositorio.UsuarioRepositorio;
+import Modelo.Soporte.Conexion;
+import Modelo.Entidades.UsuarioEntity;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    UsuarioControlador controlador = new UsuarioControlador();
+    UsuarioManejador manejador = new UsuarioManejador();
 
     public Login() throws SQLException, ClassNotFoundException {
         initComponents();
@@ -123,21 +124,28 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIniciarActionPerformed
-        if (TxtPassword.getText().equals("") || TxtUsuario.getText().equals("")) {
-            LblMensaje.setText("El usuario y/o la contraseña no pueden estar vacios");
-        } else {
-            ArrayList<String> objeto = new ArrayList();
-            objeto.add(TxtUsuario.getText());
-            objeto.add(TxtPassword.getText());
-            try {
-                UsuarioEntity entity = (UsuarioEntity) controlador.Consultar(Conexion.obtener(), objeto);
-                if (entity != null) {
-                    LblMensaje.setText("Perfecto");
-                }else{LblMensaje.setText("Ingresaste mal el usuario y/o la contraseña");}
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
+        ArrayList<String> objeto = new ArrayList();
+        objeto.add(TxtUsuario.getText());
+        objeto.add(TxtPassword.getText());
+        try {
+            Object Resultado = manejador.Consultar(Conexion.obtener(), objeto);
+            
+            if (Resultado == null) {
+                LblMensaje.setText("El usuario y /o la contraseña son erroneas.");
             }
+
+            if (Resultado.getClass().getName().contains("String")) {
+                LblMensaje.setText((String) Resultado);
+            }
+
+            if (Resultado.getClass().getName().contains("UsuarioEntity")) {
+                LblMensaje.setText("Perfecto");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_BtnIniciarActionPerformed
 
     /**
